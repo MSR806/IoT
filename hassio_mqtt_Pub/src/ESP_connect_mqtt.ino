@@ -1,16 +1,16 @@
 #include <DHT.h>
 #include <WiFi.h>
 
-const char* ssid     = "MSR-Rout";
-const char* password = "msujithr2020";
+const char *ssid = "MSR-Rout";
+const char *password = "msujithr2020";
 
 //-------------------------MQTT Setup Start----------------------------------
 #include <PubSubClient.h>
-const char* mqttServer = "192.168.1.10";
+const char *mqttServer = "192.168.1.10";
 const int mqttPort = 1883;
-const char* mqttUser = "mqtt2020";
-const char* mqttPassword = "mqtt2020";
-const char* mqttClientName = "esp32";
+const char *mqttUser = "mqtt2020";
+const char *mqttPassword = "mqtt2020";
+const char *mqttClientName = "esp32";
 
 WiFiClient esp32_msr;
 PubSubClient client(esp32_msr);
@@ -24,12 +24,13 @@ PubSubClient client(esp32_msr);
 
 DHT dht(DHTPIN, DHTTYPE);
 
-float tempExt,humExt;
+float tempExt, humExt;
 //---------------------------------------------------------------------------------
-void setup() {
-  Serial.begin(115200);  
+void setup()
+{
+  Serial.begin(115200);
   Serial.println();
-  
+
   //-----------------------------begin Wifi connect------------------------------------------
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -37,25 +38,27 @@ void setup() {
   WiFi.disconnect();
   delay(2000);
   WiFi.begin(ssid, password);
-  
-  while (WiFi.status() != WL_CONNECTED) {
+
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(500);
     Serial.print(".");
   }
 
   Serial.println("");
-  Serial.println("WiFi connected");  
+  Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   //-------------------------------end Wifi connect-------------------------------------------
 
   client.setServer(mqttServer, mqttPort);
-  
+
   dht.begin();
-  delay(5000);  
+  delay(5000);
 }
 
-void getValues() {
+void getValues()
+{
 
   tempExt = dht.readTemperature();
   humExt = dht.readHumidity();
@@ -67,26 +70,31 @@ void getValues() {
   Serial.print("Ext Humidity = ");
   Serial.print(humExt);
   Serial.println(" %");
-  
-  Serial.println();
 
+  Serial.println();
 }
 
-void reconnect() {
-   // Loop until we're reconnected
- 
+void reconnect()
+{
+  // Loop until we're reconnected
+
   int counter = 0;
-  while (!client.connected()) {
-    if (counter==5){
+  while (!client.connected())
+  {
+    if (counter == 5)
+    {
       ESP.restart();
     }
-    counter+=1;
+    counter += 1;
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-   
-    if (client.connect(mqttClientName, mqttUser, mqttPassword)) {
+
+    if (client.connect(mqttClientName, mqttUser, mqttPassword))
+    {
       Serial.println("connected");
-    } else {
+    }
+    else
+    {
       Serial.print("failed, rc=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
@@ -96,14 +104,15 @@ void reconnect() {
   }
 }
 
-
-void loop() {
-  if (!client.connected()){
+void loop()
+{
+  if (!client.connected())
+  {
     reconnect();
   }
   getValues();
 
-   client.publish(mqttTempExt, String(tempExt).c_str(),true);
-   client.publish(mqttHumExt, String(humExt).c_str(),true);
+  client.publish(mqttTempExt, String(tempExt).c_str(), true);
+  client.publish(mqttHumExt, String(humExt).c_str(), true);
   delay(1000);
 }
