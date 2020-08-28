@@ -33,14 +33,14 @@ Run node-red at boot:</br>
 </br>
 ## Sqlite3 commands
 `sqlite3 data.db`</br>
-- This will create a database in the file data.db. We should now be in a sqlite shell, so type:</br>
+This will create a database in the file data.db. We should now be in a sqlite shell, so type:</br>
 `CREATE TABLE climate (reading_time datetime, temperature float, humidity float);`</br>
 </br>
-- Now we’ve created a table called climate, we can add to that table. Let’s test it by adding a random date, time, humidity and temperature:</br>
+Now we’ve created a table called climate, we can add to that table. Let’s test it by adding a random date, time, humidity and temperature:</br>
 `INSERT INTO climate (reading_time, temperature, humidity) values (“2011-06-21 12:34:56”, 20, 77);`</br>
 </br>
-- You can view the contents of the table,</br>
+You can view the contents of the table,</br>
 `SELECT * FROM climate;`</br>
 </br>
-- And you can clear the table,</br>
+And you can clear the table,</br>
 `DELETE FROM climate;`</br>
