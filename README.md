@@ -1,6 +1,6 @@
 # IoT
 
-##Installation Guide
+## Installation Guide
 -- Raspberry Pi Imager
 https://www.raspberrypi.org/downloads/
 
@@ -31,7 +31,7 @@ https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
 -- Install SQLite:
 `sudo apt-get install sqlite3`
 
-##Sqlite3 commands
+## Sqlite3 commands
 `sqlite3 data.db`
 This will create a database in the file data.db. We should now be in a sqlite shell, so type:
 `CREATE TABLE climate (reading_time datetime, temperature float, humidity float);`
