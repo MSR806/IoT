@@ -18,13 +18,16 @@ https://www.raspberrypi.org/documentation/configuration/wireless/headless.md</br
 </br>
 ### Install Mosquitto MQTT </br>
 `sudo apt install -y mosquitto mosquitto-clients`</br>
+</br>
 Run Mosquitto MQTT at boot:</br>
 `sudo systemctl enable mosquitto.service`</br>
+</br>
 Check Mosquitto is installed:</br>
 `mosquitto -v`</br>
 </br>
 ### Install node-red: </br>
 `bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)`</br>
+</br>
 Run node-red at boot:</br>
 `sudo systemctl enable nodered.service`</br>
 </br>
@@ -33,6 +36,7 @@ Run node-red at boot:</br>
 </br>
 ## Sqlite3 commands
 `sqlite3 data.db`</br>
+</br>
 This will create a database in the file data.db. We should now be in a sqlite shell, so type:</br>
 `CREATE TABLE climate (reading_time datetime, temperature float, humidity float);`</br>
 </br>
