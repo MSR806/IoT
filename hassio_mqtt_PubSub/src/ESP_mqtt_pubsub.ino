@@ -6,7 +6,7 @@ const char *password = "msujithr2020";
 
 //-------------------------MQTT Setup Start----------------------------------
 #include <PubSubClient.h>
-const char *mqttServer = "192.168.1.10";
+const char *mqttServer = "192.168.1.12";
 const int mqttPort = 1883;
 const char *mqttUser = "mqtt2020";
 const char *mqttPassword = "mqtt2020";
@@ -17,13 +17,17 @@ PubSubClient client(esp32_msr);
 
 #define mqttTempExt "home/tempExt"
 #define mqttHumExt "home/humExt"
-#define mqttLedState "home/ledState"
+#define mqttLedStateR "home/ledStateR"
+#define mqttLedStateG "home/ledStateG"
 //---------------------------MQTT Setup End-------------------------------------
 
 #define DHTPIN 33 // DHT Pin
 #define DHTTYPE DHT11
-const int ledPin = 2;       // LED Pin
-bool ledState = false; //setting led off initially
+const int ledPinR = 2; // LED Pin
+const int ledPinG = 15;
+bool ledStateR = false; //setting led off initially
+bool ledStateG = false; //setting led off initially
+bool msgCame = false;
 long lastMsg = 0;
 
 DHT dht(DHTPIN, DHTTYPE);
@@ -35,13 +39,15 @@ void setup()
 {
     Serial.begin(115200);
     Serial.println();
-    pinMode(ledPin, OUTPUT);
+    pinMode(ledPinR, OUTPUT);
+    pinMode(ledPinG, OUTPUT);
 
     connectWifi(); //connect to wifi
 
     client.setServer(mqttServer, mqttPort); //connect to mqtt server
     client.setCallback(callback);           // setting Callback to callback function
-    client.subscribe(mqttLedState);         // Subscribe to the topic
+    client.subscribe(mqttLedStateR);        // Subscribe to the topic
+    client.subscribe(mqttLedStateG);        // Subscribe to the topic
 
     dht.begin(); // start dht sensor
     delay(1000);
@@ -55,15 +61,34 @@ void loop()
     }
 
     client.loop(); // checks if there are any messages in the subscribed topic
-    if (ledState){ // check the ledState and toggle the LED accordingly
-        digitalWrite(ledPin, HIGH);
-    }
-    else if (!ledState){ // check the ledState and
-        digitalWrite(ledPin, LOW);
+    if (msgCame)
+    {
+        if (ledStateR)
+        { // check the ledState and toggle the LED accordingly
+            digitalWrite(ledPinR, HIGH);
+            Serial.println("LedR is turned On");
+        }
+        else if (!ledStateR)
+        { // check the ledState and
+            digitalWrite(ledPinR, LOW);
+            Serial.println("LedR is turned Off");
+        }
+        if (ledStateG)
+        { // check the ledState and toggle the LED accordingly
+            digitalWrite(ledPinG, HIGH);
+            Serial.println("LedG is turned On");
+        }
+        else if (!ledStateG)
+        { // check the ledState and
+            digitalWrite(ledPinG, LOW);
+            Serial.println("LedG is turned Off");
+        }
+        msgCame = false;
     }
 
     long now = millis();
-    if (now - lastMsg > 1000) { //allow to publish the values once in 5 seconds
+    if (now - lastMsg > 1000)
+    { //allow to publish the values once in 5 seconds
         lastMsg = now;
 
         //reads temp and hum and publish them to their respective topics
@@ -101,33 +126,50 @@ void connectWifi()
 
 //---------------------------callback function-----------------------------
 
-void callback(char *topic, byte *message, unsigned int length)
+void callback(String topic, byte *message, unsigned int length)
 {
     Serial.print("Message arrived on topic: ");
     Serial.print(topic);
     Serial.print(". Message: ");
-    String ledVal;
+    String messageTemp;
 
     for (int i = 0; i < length; i++)
     {
         Serial.print((char)message[i]);
-        ledVal += (char)message[i];
+        messageTemp += (char)message[i];
     }
     Serial.println();
-    Serial.println(ledVal);
     // If a message is received on the topic esp32/output, you check if the message is either "on" or "off".
     // Changes the output state according to the message
-    if (String(topic) == mqttLedState)
+    if (topic == mqttLedStateR)
     {
-        if(ledVal == "true"){
-            ledState = true;
-            Serial.println("Led turned On");
-            }
-        else {
-            ledState = false;
-            Serial.println("Led turned Off");
-            }
+        if (messageTemp == "true")
+        {
+            ledStateR = true;
+            Serial.println("LedStateR = true");
+        }
+        else
+        {
+            ledStateR = false;
+            Serial.println("LedStateR = false");
+        }
+        msgCame = true;
     }
+    if (topic == mqttLedStateG)
+    {
+        if (messageTemp == "true")
+        {
+            ledStateG = true;
+            Serial.println("LedStateG = true");
+        }
+        else
+        {
+            ledStateG = false;
+            Serial.println("LedStateR = false");
+        }
+        msgCame = true;
+    }
+    Serial.println();
 }
 //-------------------------------------------------------------------------
 
@@ -156,21 +198,22 @@ void reconnect()
 {
     // Loop until we're reconnected
 
-    int counter = 0;
+    //int counter = 0;
     while (!client.connected())
     {
-        if (counter == 5)
+        /*if (counter == 5)
         {
             ESP.restart();
         }
-        counter += 1;
+        counter += 1;*/
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
 
         if (client.connect(mqttClientName, mqttUser, mqttPassword))
         {
             Serial.println("connected");
-            client.subscribe(mqttLedState); // Subscribe to the topic
+            client.subscribe(mqttLedStateR); // Subscribe to the topic
+            client.subscribe(mqttLedStateG); // Subscribe to the topic
         }
         else
         {
