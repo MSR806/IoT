@@ -18,14 +18,14 @@ https://www.raspberrypi.org/documentation/configuration/wireless/headless.md</br
 </br>
 ### Install Mosquitto MQTT </br>
 `sudo apt install -y mosquitto mosquitto-clients`</br>
-- Run Mosquitto MQTT at boot:</br>
+Run Mosquitto MQTT at boot:</br>
 `sudo systemctl enable mosquitto.service`</br>
-- Check Mosquitto is installed:</br>
+Check Mosquitto is installed:</br>
 `mosquitto -v`</br>
 </br>
 ### Install node-red: </br>
 `bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)`</br>
-- Run node-red at boot:</br>
+Run node-red at boot:</br>
 `sudo systemctl enable nodered.service`</br>
 </br>
 ### Install SQLite:</br>
