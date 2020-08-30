@@ -50,7 +50,7 @@ And you can clear the table,</br>
 `DELETE FROM climate;`</br>
 </br>
 ## Node Red Installation guide on Windows</br>
-</br>
+
 ### 1. Install Node.js</br>
 Download the latest 12.x LTS version of Node.js from the official Node.js home page. It will offer you the best version for your system.</br>
 </br>
