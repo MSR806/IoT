@@ -58,9 +58,9 @@ Run the downloaded MSI file. Installing Node.js requires local administrator rig
 </br>
 Once installed, open a command prompt and run the following command to ensure Node.js and npm are installed correctly.</br>
 
-Using Powershell: node --version; npm --version</br>
+Using Powershell: `node --version`; `npm --version`</br>
 </br>
-Using cmd: node --version && npm --version</br>
+Using cmd: `node --version && npm --version`</br>
 </br>
 You should receive back output that looks similar to:</br>
 </br>
