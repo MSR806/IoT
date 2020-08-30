@@ -1,6 +1,6 @@
 # IoT
 
-## Installation Guide
+## Installation Guide on Raspberry Pi
 ### Raspberry Pi Imager</br>
 https://www.raspberrypi.org/downloads/</br>
 </br>
@@ -48,3 +48,27 @@ You can view the contents of the table,</br>
 </br>
 And you can clear the table,</br>
 `DELETE FROM climate;`</br>
+</br>
+## Node Red Installation guide</br>
+</br>
+### 1. Install Node.js</br>
+Download the latest 12.x LTS version of Node.js from the official Node.js home page. It will offer you the best version for your system.</br>
+</br>
+Run the downloaded MSI file. Installing Node.js requires local administrator rights; if you are not a local administrator, you will be prompted for an administrator password on install. Accept the defaults when installing. After installation completes, close any open command prompts and re-open to ensure new environment variables are picked up.</br>
+</br>
+Once installed, open a command prompt and run the following command to ensure Node.js and npm are installed correctly.</br>
+
+Using Powershell: node --version; npm --version</br>
+</br>
+Using cmd: node --version && npm --version</br>
+</br>
+You should receive back output that looks similar to:</br>
+</br>
+`v12.15.0`</br>
+`6.14.5`</br>
+### 2. Install Node-RED</br>
+Installing Node-RED as a global module adds the command node-red to your system path. Execute the following at the command prompt:</br>
+</br>
+`npm install -g --unsafe-perm node-red`</br>
+### 3. Run Node-RED</br>
+Once installed, you are ready to run Node-RED.</br>
