@@ -1,5 +1,5 @@
-#include <DHT.h>
-#include <WiFi.h>
+#include <DHT.h>  //#include <Adafruit_Sensor.h>
+#include <WiFi.h> //#include <ESP8266WiFi.h>
 
 const char *ssid = "MSR-Rout";
 const char *password = "msujithr2020";
