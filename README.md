@@ -7,7 +7,7 @@ https://www.raspberrypi.org/downloads/</br>
 ### Download Putty</br>
 https://putty.org/</br>
 </br>
-###Connecting to Rpi via VNC
+###Connecting to Rpi via VNC</br>
 https://www.raspberrypi.org/documentation/remote-access/vnc/</br>
 You might also face a situation of `Cannot currrently show the desktop` error for that
 https://www.tomshardware.com/how-to/fix-cannot-currently-show-desktop-error-raspberry-pi
