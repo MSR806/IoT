@@ -1,3 +1,12 @@
+/*
+SDA 5
+SCK 18
+MOSI 23
+MISO 19
+RST 22
+*/
+
+
 #include <WiFi.h> //#include <ESP8266WiFi.h>
 #include <SPI.h>
 #include <MFRC522.h>
