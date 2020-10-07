@@ -1,0 +1,46 @@
+:root {
+}
+
+.navbar.navbar-dark.navbar-expand-md.bg-dark {
+  background-color: #146a0f!important;
+}
+
+.navbar-dark .navbar-brand {
+  color: #35ff2a;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 0px;
+  padding-bottom: 10px;
+}
+
+.fa.fa-envelope-o {
+  margin-right: 10px;
+}
+
+.fa.fa-user {
+  margin-right: 10px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #f2f1df;
+}
+
+p {
+  font-size: 25px;
+}
+
+.form-group {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  background-color: #35ff2a;
+  color: #146a0f;
+  font-weight: 700;
+  border-color: #fff;
+}
+
