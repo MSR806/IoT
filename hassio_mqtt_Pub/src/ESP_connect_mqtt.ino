@@ -1,4 +1,5 @@
-#include <DHT.h>  //#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <Adafruit_Sensor.h>
 #include <WiFi.h> //#include <ESP8266WiFi.h>
 
 const char *ssid = "MSR-Rout";
@@ -6,7 +7,7 @@ const char *password = "msujithr2020";
 
 //-------------------------MQTT Setup Start----------------------------------
 #include <PubSubClient.h>
-const char *mqttServer = "192.168.1.10";
+const char *mqttServer = "192.168.1.5";
 const int mqttPort = 1883;
 const char *mqttUser = "mqtt2020";
 const char *mqttPassword = "mqtt2020";
